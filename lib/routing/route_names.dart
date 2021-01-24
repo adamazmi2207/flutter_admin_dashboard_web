@@ -1,0 +1,9 @@
+const String HomeDashboardRoute = '/home';
+const String UsersRoute = '/users';
+const String PurchaseRoute = '/purchase';
+const String LoginRoute = '/login';
+const String BrandsRoute = '/brands';
+const String BannersRoute = '/banner';
+const String ComplaintRoute = '/complaint';
+const String SettingsRoute = '/settings';
+const String AnnouncementRoute = '/announcement';
