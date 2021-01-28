@@ -69,7 +69,39 @@ class Body extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 20),
-                Expanded(child: SalesChart()),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          children: [
+                            Expanded(child: SalesChart()),
+                            SizedBox(height: 20),
+                            Container(
+                              // width: MediaQuery.of(context).size.width,
+                              // height: 100,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Recent Activities',
+                                    style: TextStyle(
+                                        color: kWhite,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
                 // BarChartSample1(),
                 // RevenueChart(),
               ],

@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_admin_dashboard_web/theme/color/colors.dart';
 
 class SalesChart extends StatefulWidget {
   @override
@@ -24,8 +25,10 @@ class SalesChartState extends State<SalesChart> {
           borderRadius: BorderRadius.all(Radius.circular(18)),
           gradient: LinearGradient(
             colors: [
-              Color(0xff2c274c),
-              Color(0xff46426c),
+              kLightBlack,
+              Colors.black26,
+              // Color(0xff2c274c),
+              // Color(0xff46426c),
             ],
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
@@ -36,11 +39,19 @@ class SalesChartState extends State<SalesChart> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                const SizedBox(
-                  height: 37,
-                ),
+                const SizedBox(height: 37),
                 const Text(
-                  'Unfold Shop 2018',
+                  'Monthly Sales',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 32,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 2),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Sample Shop 2021',
                   style: TextStyle(
                     color: Color(0xff827daa),
                     fontSize: 16,
@@ -48,19 +59,7 @@ class SalesChartState extends State<SalesChart> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
-                  height: 4,
-                ),
-                const Text(
-                  'Monthly Sales',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 2),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 37,
+                  height: 15,
                 ),
                 Expanded(
                   child: Padding(
@@ -76,16 +75,45 @@ class SalesChartState extends State<SalesChart> {
                 ),
               ],
             ),
-            IconButton(
-              icon: Icon(
-                Icons.refresh,
-                color: Colors.white.withOpacity(isShowingMainData ? 1.0 : 0.5),
+            Positioned(
+              left: 20,
+              top: 20,
+              child: IconButton(
+                icon: Icon(
+                  Icons.refresh,
+                  color:
+                      Colors.white.withOpacity(isShowingMainData ? 1.0 : 0.5),
+                ),
+                onPressed: () {
+                  setState(() {
+                    isShowingMainData = !isShowingMainData;
+                  });
+                },
               ),
-              onPressed: () {
-                setState(() {
-                  isShowingMainData = !isShowingMainData;
-                });
-              },
+            ),
+            Positioned(
+              right: 20,
+              top: 20,
+              child: OutlineButton.icon(
+                onPressed: () {
+                  print('weekly button pressed');
+                },
+                borderSide: BorderSide(color: kWhite),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                // color: kWhite,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0)),
+                icon: Icon(
+                  Icons.arrow_drop_down_outlined,
+                  color: kWhite,
+                ),
+                label: Text(
+                  'Weekly (2021)',
+                  style: TextStyle(
+                    color: kWhite,
+                  ),
+                ),
+              ),
             )
           ],
         ),
@@ -108,7 +136,7 @@ class SalesChartState extends State<SalesChart> {
       titlesData: FlTitlesData(
         bottomTitles: SideTitles(
           showTitles: true,
-          reservedSize: 22,
+          reservedSize: 10,
           getTextStyles: (value) => const TextStyle(
             color: Color(0xff72719b),
             fontWeight: FontWeight.bold,
@@ -117,10 +145,18 @@ class SalesChartState extends State<SalesChart> {
           margin: 10,
           getTitles: (value) {
             switch (value.toInt()) {
-              case 2:
-                return 'SEPT';
+              case 6:
+                return 'JUNE';
               case 7:
+                return 'JULY';
+              case 8:
+                return 'AUG';
+              case 9:
+                return 'SEPT';
+              case 10:
                 return 'OCT';
+              case 11:
+                return 'NOV';
               case 12:
                 return 'DEC';
             }
@@ -137,13 +173,15 @@ class SalesChartState extends State<SalesChart> {
           getTitles: (value) {
             switch (value.toInt()) {
               case 1:
-                return '1m';
+                return '100k';
               case 2:
-                return '2m';
+                return '200k';
               case 3:
-                return '3m';
+                return '300k';
               case 4:
-                return '5m';
+                return '400k';
+              case 5:
+                return '500k';
             }
             return '';
           },
@@ -156,10 +194,11 @@ class SalesChartState extends State<SalesChart> {
         border: const Border(
           bottom: BorderSide(
             color: Color(0xff4e4965),
-            width: 4,
+            width: 2,
           ),
           left: BorderSide(
-            color: Colors.transparent,
+            color: Color(0xff4e4965),
+            width: 2,
           ),
           right: BorderSide(
             color: Colors.transparent,
@@ -169,9 +208,9 @@ class SalesChartState extends State<SalesChart> {
           ),
         ),
       ),
-      minX: 0,
-      maxX: 14,
-      maxY: 4,
+      minX: 5.5,
+      maxX: 12.5,
+      maxY: 5,
       minY: 0,
       lineBarsData: linesBarData1(),
     );
@@ -180,22 +219,22 @@ class SalesChartState extends State<SalesChart> {
   List<LineChartBarData> linesBarData1() {
     final LineChartBarData lineChartBarData1 = LineChartBarData(
       spots: [
-        FlSpot(1, 1),
-        FlSpot(3, 1.5),
-        FlSpot(5, 1.4),
-        FlSpot(7, 3.4),
+        FlSpot(6, 1),
+        FlSpot(7, 1.5),
+        FlSpot(8, 1.4),
+        FlSpot(9, 3.4),
         FlSpot(10, 2),
-        FlSpot(12, 2.2),
-        FlSpot(13, 1.8),
+        FlSpot(11, 2.2),
+        FlSpot(12, 1.8),
       ],
       isCurved: true,
       colors: [
         const Color(0xff4af699),
       ],
-      barWidth: 8,
+      barWidth: 4,
       isStrokeCapRound: true,
       dotData: FlDotData(
-        show: false,
+        show: true,
       ),
       belowBarData: BarAreaData(
         show: false,
@@ -203,21 +242,22 @@ class SalesChartState extends State<SalesChart> {
     );
     final LineChartBarData lineChartBarData2 = LineChartBarData(
       spots: [
-        FlSpot(1, 1),
-        FlSpot(3, 2.8),
-        FlSpot(7, 1.2),
-        FlSpot(10, 2.8),
-        FlSpot(12, 2.6),
-        FlSpot(13, 3.9),
+        FlSpot(6, 1),
+        FlSpot(7, 2.8),
+        FlSpot(8, 1.2),
+        FlSpot(9, 2.8),
+        FlSpot(10, 2.6),
+        FlSpot(11, 3.9),
+        FlSpot(12, 4.0),
       ],
       isCurved: true,
       colors: [
         const Color(0xffaa4cfc),
       ],
-      barWidth: 8,
+      barWidth: 4,
       isStrokeCapRound: true,
       dotData: FlDotData(
-        show: false,
+        show: true,
       ),
       belowBarData: BarAreaData(show: false, colors: [
         const Color(0x00aa4cfc),
@@ -225,20 +265,22 @@ class SalesChartState extends State<SalesChart> {
     );
     final LineChartBarData lineChartBarData3 = LineChartBarData(
       spots: [
-        FlSpot(1, 2.8),
-        FlSpot(3, 1.9),
-        FlSpot(6, 3),
-        FlSpot(10, 1.3),
-        FlSpot(13, 2.5),
+        FlSpot(6, 2.8),
+        FlSpot(7, 1.9),
+        FlSpot(8, 3),
+        FlSpot(9, 1.3),
+        FlSpot(10, 2.5),
+        FlSpot(11, 2.0),
+        FlSpot(12, 2.5),
       ],
       isCurved: true,
       colors: const [
         Color(0xff27b6fc),
       ],
-      barWidth: 8,
+      barWidth: 4,
       isStrokeCapRound: true,
       dotData: FlDotData(
-        show: false,
+        show: true,
       ),
       belowBarData: BarAreaData(
         show: false,
